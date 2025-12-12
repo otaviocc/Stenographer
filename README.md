@@ -1,6 +1,8 @@
 # Stenographer
 
-Stenographer is a simple macOS application for transcribing audio and video files using Apple's on-device speech recognition. Drop a media file (MP3, M4A, WAV, etc.) onto the left panel, select a language, and watch as the transcription appears in real-time on the right. Once complete, you can copy the text to your clipboard or save it to a file.
+<img width="1134" height="757" alt="Screenshot of the Stenographer application for macOS Tahoe" src="https://github.com/user-attachments/assets/2ebe574d-8a61-445a-bbeb-680bd64ff365" />
+
+**Stenographer** is a simple macOS application for transcribing audio and video files using Apple's on-device speech recognition. Drop a media file (MP3, M4A, WAV, etc.) onto the left panel, select a language, and watch as the transcription appears in real-time on the right. Once complete, you can copy the text to your clipboard or save it to a file.
 
 The app leverages the new `SpeechTranscriber` and `SpeechAnalyzer` APIs introduced in macOS Tahoe (macOS 26), which provide high-quality, privacy-preserving transcription entirely on-device. Language models are downloaded automatically when needed.
 
