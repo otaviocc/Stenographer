@@ -13,7 +13,7 @@ This project was created as a learning exercise to explore Apple's new Speech fr
 - The new `SpeechTranscriber` and `SpeechAnalyzer` APIs
 - On-device speech recognition with `AssetInventory` for language model management
 - SwiftUI patterns with `@Observable` ViewModels
-- Actor-based repository architecture for thread-safe async operations
+- Actor-based Service architecture for thread-safe async operations
 
 ## Requirements
 
