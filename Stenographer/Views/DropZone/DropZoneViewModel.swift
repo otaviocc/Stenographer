@@ -65,24 +65,9 @@ final class DropZoneViewModel {
             guard let url = try? await provider.loadItem(forTypeIdentifier: type.identifier) as? URL else { return }
 
             originalFileName = url.lastPathComponent
-            droppedFileURL = copyFileToTemporaryLocation(from: url)
+            droppedFileURL = url
         }
 
         return true
-    }
-
-    // MARK: - Private
-
-    private func copyFileToTemporaryLocation(
-        from url: URL
-    ) -> URL? {
-        let tempURL = FileManager.default
-            .temporaryDirectory
-            .appendingPathComponent(UUID().uuidString)
-            .appendingPathExtension(url.pathExtension)
-
-        try? FileManager.default.copyItem(at: url, to: tempURL)
-
-        return tempURL
     }
 }

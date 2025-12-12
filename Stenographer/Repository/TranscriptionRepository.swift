@@ -7,6 +7,7 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
     // MARK: - Properties
 
     private var transcriptionTask: Task<Void, Never>?
+    private var currentTemporaryFileURL: URL?
 
     var supportedLocales: [Locale] {
         get async {
@@ -22,8 +23,16 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
     ) -> AsyncThrowingStream<TranscriptionEvent, Error> {
         .init { continuation in
             Task { [weak self] in
-                await self?.performTranscription(
-                    url: url,
+                guard let self else { return }
+
+                let temporaryURL = await copyToTemporaryLocation(from: url)
+                guard let temporaryURL else {
+                    continuation.finish(throwing: TranscriptionError.failedToCopyFile)
+                    return
+                }
+
+                await performTranscription(
+                    url: temporaryURL,
                     locale: locale,
                     continuation: continuation
                 )
@@ -34,6 +43,7 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
     func cancel() {
         transcriptionTask?.cancel()
         transcriptionTask = nil
+        deleteTemporaryFile()
     }
 
     // MARK: - Private
@@ -43,6 +53,8 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
         locale: Locale,
         continuation: AsyncThrowingStream<TranscriptionEvent, Error>.Continuation
     ) async {
+        currentTemporaryFileURL = url
+
         do {
             continuation.yield(
                 .statusChanged("Checking language assets...")
@@ -99,8 +111,32 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
 
             continuation.yield(.completed)
             continuation.finish()
+            deleteTemporaryFile()
         } catch {
             continuation.finish(throwing: error)
+            deleteTemporaryFile()
         }
+    }
+
+    private nonisolated func copyToTemporaryLocation(
+        from url: URL
+    ) -> URL? {
+        let temporaryURL = FileManager.default
+            .temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathExtension(url.pathExtension)
+
+        do {
+            try FileManager.default.copyItem(at: url, to: temporaryURL)
+            return temporaryURL
+        } catch {
+            return nil
+        }
+    }
+
+    private func deleteTemporaryFile() {
+        guard let url = currentTemporaryFileURL else { return }
+        try? FileManager.default.removeItem(at: url)
+        currentTemporaryFileURL = nil
     }
 }
