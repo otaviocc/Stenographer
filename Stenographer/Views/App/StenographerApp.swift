@@ -28,8 +28,7 @@ struct StenographerApp: View {
 
             Divider()
 
-            TranscriptionView(viewModel: transcriptionViewModel)
-                .frame(minWidth: 400)
+            makeTranscriptionView()
         }
         .frame(minWidth: 700, minHeight: 500)
         .background(.ultraThinMaterial)
@@ -51,23 +50,36 @@ struct StenographerApp: View {
     // MARK: - Private
 
     @ViewBuilder
+    private func makeTranscriptionView() -> some View {
+        TranscriptionView(
+            viewModel: transcriptionViewModel
+        )
+        .frame(minWidth: 400)
+    }
+
+    @ViewBuilder
     private func makeDropZoneSection() -> some View {
         VStack(spacing: 0) {
-            DropZoneView(
-                viewModel: dropZoneViewModel,
-                onFileDrop: { url in
-                    viewModel.transcribe(url: url)
-                },
-                onCancel: {
-                    viewModel.cancel()
-                }
-            )
+            makeDropZoneView()
 
             Divider()
 
             makeLocalePickerView()
         }
         .frame(minWidth: 280, maxWidth: 320)
+    }
+
+    @ViewBuilder
+    private func makeDropZoneView() -> some View {
+        DropZoneView(
+            viewModel: dropZoneViewModel,
+            onFileDrop: { url in
+                viewModel.transcribe(url: url)
+            },
+            onCancel: {
+                viewModel.cancel()
+            }
+        )
     }
 
     @ViewBuilder
