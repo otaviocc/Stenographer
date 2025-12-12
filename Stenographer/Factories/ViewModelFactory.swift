@@ -4,21 +4,21 @@ final class ViewModelFactory: Sendable {
 
     // MARK: - Properties
 
-    private let repository: any TranscriptionRepositoryProtocol
+    private let service: any TranscriptionServiceProtocol
 
     // MARK: - Lifecycle
 
     init(
-        repository: any TranscriptionRepositoryProtocol
+        service: any TranscriptionServiceProtocol
     ) {
-        self.repository = repository
+        self.service = service
     }
 
     // MARK: - Public
 
     @MainActor
     func makeStenographerAppViewModel() -> StenographerAppViewModel {
-        .init(repository: repository)
+        .init(service: service)
     }
 
     @MainActor
@@ -42,6 +42,6 @@ extension EnvironmentValues {
 extension ViewModelFactory {
 
     static let placeholder = ViewModelFactory(
-        repository: TranscriptionRepository()
+        service: TranscriptionService()
     )
 }

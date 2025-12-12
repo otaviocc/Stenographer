@@ -8,7 +8,7 @@
 
         static func makeViewModelFactory() -> ViewModelFactory {
             .init(
-                repository: TranscriptionRepositoryMother.makeTranscriptionRepository()
+                service: TranscriptionServiceMother.makeTranscriptionService()
             )
         }
     }

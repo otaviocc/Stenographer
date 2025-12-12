@@ -9,7 +9,7 @@
         @MainActor
         static func makeStenographerAppViewModel() -> StenographerAppViewModel {
             .init(
-                repository: TranscriptionRepositoryMother.makeTranscriptionRepository()
+                service: TranscriptionServiceMother.makeTranscriptionService()
             )
         }
     }

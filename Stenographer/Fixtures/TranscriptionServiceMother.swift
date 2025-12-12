@@ -2,11 +2,11 @@
 
     import Foundation
 
-    enum TranscriptionRepositoryMother {
+    enum TranscriptionServiceMother {
 
         // MARK: - Nested types
 
-        private actor FakeTranscriptionRepository: TranscriptionRepositoryProtocol {
+        private actor FakeTranscriptionService: TranscriptionServiceProtocol {
 
             // MARK: - Properties
 
@@ -39,8 +39,8 @@
 
         // MARK: - Public
 
-        static func makeTranscriptionRepository() -> any TranscriptionRepositoryProtocol {
-            FakeTranscriptionRepository()
+        static func makeTranscriptionService() -> any TranscriptionServiceProtocol {
+            FakeTranscriptionService()
         }
     }
 

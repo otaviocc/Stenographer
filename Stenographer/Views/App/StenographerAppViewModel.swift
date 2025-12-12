@@ -20,22 +20,22 @@ final class StenographerAppViewModel {
     private(set) var statusMessage = ""
     private(set) var isLoadingLocales = true
 
-    private let repository: any TranscriptionRepositoryProtocol
+    private let service: any TranscriptionServiceProtocol
     private var transcriptionTask: Task<Void, Never>?
 
     // MARK: - Lifecycle
 
     init(
-        repository: any TranscriptionRepositoryProtocol
+        service: any TranscriptionServiceProtocol
     ) {
-        self.repository = repository
+        self.service = service
     }
 
     // MARK: - Public
 
     func loadSupportedLocales() {
         Task {
-            let locales = await repository.supportedLocales
+            let locales = await service.supportedLocales
 
             supportedLocales = locales.sorted { lhs, rhs in
                 let lhsName = lhs.localizedString(forIdentifier: lhs.identifier) ?? lhs.identifier
@@ -65,7 +65,7 @@ final class StenographerAppViewModel {
             guard let self else { return }
 
             do {
-                let stream = await repository.transcribe(
+                let stream = await service.transcribe(
                     url: url,
                     locale: selectedLocale
                 )
@@ -85,7 +85,7 @@ final class StenographerAppViewModel {
         transcriptionTask = nil
 
         Task {
-            await repository.cancel()
+            await service.cancel()
         }
 
         isTranscribing = false

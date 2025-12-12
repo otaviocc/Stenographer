@@ -1,6 +1,6 @@
 import Foundation
 
-protocol TranscriptionRepositoryProtocol: Actor {
+protocol TranscriptionServiceProtocol: Actor {
 
     var supportedLocales: [Locale] { get async }
 

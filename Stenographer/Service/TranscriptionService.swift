@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 import Speech
 
-actor TranscriptionRepository: TranscriptionRepositoryProtocol {
+actor TranscriptionService: TranscriptionServiceProtocol {
 
     // MARK: - Properties
 
@@ -25,9 +25,12 @@ actor TranscriptionRepository: TranscriptionRepositoryProtocol {
             Task { [weak self] in
                 guard let self else { return }
 
-                let temporaryURL = await copyToTemporaryLocation(from: url)
+                let temporaryURL = copyToTemporaryLocation(from: url)
+
                 guard let temporaryURL else {
-                    continuation.finish(throwing: TranscriptionError.failedToCopyFile)
+                    continuation.finish(
+                        throwing: TranscriptionError.failedToCopyFile
+                    )
                     return
                 }
 

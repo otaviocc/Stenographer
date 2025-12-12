@@ -10,8 +10,8 @@ struct StenographerApplication: App {
     // MARK: - Lifecycle
 
     init() {
-        let repository = TranscriptionRepository()
-        viewModelFactory = ViewModelFactory(repository: repository)
+        let service = TranscriptionService()
+        viewModelFactory = ViewModelFactory(service: service)
     }
 
     // MARK: - Public
