@@ -25,7 +25,7 @@ actor TranscriptionService: TranscriptionServiceProtocol {
             Task { [weak self] in
                 guard let self else { return }
 
-                let temporaryURL = copyToTemporaryLocation(from: url)
+                let temporaryURL = await copyToTemporaryLocation(from: url)
 
                 guard let temporaryURL else {
                     continuation.finish(
@@ -121,7 +121,7 @@ actor TranscriptionService: TranscriptionServiceProtocol {
         }
     }
 
-    private nonisolated func copyToTemporaryLocation(
+    private func copyToTemporaryLocation(
         from url: URL
     ) -> URL? {
         let temporaryURL = FileManager.default
