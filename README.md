@@ -6,6 +6,15 @@
 
 The app leverages the new `SpeechTranscriber` and `SpeechAnalyzer` APIs introduced in macOS Tahoe (macOS 26), which provide high-quality, privacy-preserving transcription entirely on-device. Language models are downloaded automatically when needed.
 
+## Install Stenographer
+
+**Install via [Brew](https://brew.sh) 🤩**
+
+```bash
+brew tap otaviocc/apps
+brew install --cask stenographer
+```
+
 ## Learning Exercise
 
 This project was created as a learning exercise to explore Apple's new Speech framework capabilities in macOS Tahoe. While the application is functional and produces quality transcriptions, it is not intended for release on the App Store. It serves as a reference implementation for understanding:
