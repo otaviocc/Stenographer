@@ -95,7 +95,7 @@ struct StenographerApp: View {
             } else {
                 Picker("", selection: $viewModel.selectedLocale) {
                     ForEach(viewModel.supportedLocales, id: \.identifier) { locale in
-                        Text(locale.localizedString(forIdentifier: locale.identifier) ?? locale.identifier)
+                        Text(locale.localizedString(forIdentifier: locale.identifier)?.capitalized ?? locale.identifier)
                             .tag(locale)
                     }
                 }
