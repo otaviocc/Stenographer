@@ -51,11 +51,15 @@ final class DropZoneViewModel {
 
     // MARK: - Public
 
-    func updateTranscribingState(_ isTranscribing: Bool) {
+    func updateTranscribingState(
+        _ isTranscribing: Bool
+    ) {
         self.isTranscribing = isTranscribing
     }
 
-    func handleDrop(providers: [NSItemProvider]) -> Bool {
+    func handleDrop(
+        providers: [NSItemProvider]
+    ) -> Bool {
         guard !isTranscribing,
               let provider = providers.first,
               let type = supportedTypes.first(where: { provider.hasItemConformingToTypeIdentifier($0.identifier) })

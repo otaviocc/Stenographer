@@ -53,7 +53,9 @@ final class StenographerAppViewModel {
         }
     }
 
-    func transcribe(url: URL) {
+    func transcribe(
+        url: URL
+    ) {
         transcription = .init()
         error = nil
         isTranscribing = true
