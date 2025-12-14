@@ -6,14 +6,14 @@ actor TranscriptionService: TranscriptionServiceProtocol {
 
     // MARK: - Properties
 
-    private var transcriptionTask: Task<Void, Never>?
-    private var currentTemporaryFileURL: URL?
-
     var supportedLocales: [Locale] {
         get async {
             await SpeechTranscriber.supportedLocales
         }
     }
+
+    private var transcriptionTask: Task<Void, Never>?
+    private var currentTemporaryFileURL: URL?
 
     // MARK: - Public
 

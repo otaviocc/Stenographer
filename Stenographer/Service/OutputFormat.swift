@@ -6,7 +6,7 @@ enum OutputFormat: String, CaseIterable {
     case txt
     case srt
 
-    // MARK: - Internal
+    // MARK: - Public
 
     var fileExtension: String {
         rawValue

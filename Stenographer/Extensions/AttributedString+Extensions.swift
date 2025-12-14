@@ -10,7 +10,9 @@ extension AttributedString {
         let timeRange: CMTimeRange
     }
 
-    func timedSegments(maxCharacters: Int) -> [TimedSegment] {
+    func timedSegments(
+        maxCharacters: Int
+    ) -> [TimedSegment] {
         var segments: [TimedSegment] = []
 
         for run in runs {
@@ -19,7 +21,9 @@ extension AttributedString {
             }
 
             let text = String(self[run.range].characters)
-            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimmedText = text.trimmingCharacters(
+                in: .whitespacesAndNewlines
+            )
 
             guard !trimmedText.isEmpty else {
                 continue

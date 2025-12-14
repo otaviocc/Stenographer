@@ -11,7 +11,7 @@ enum TranscriptionExportService {
         static let srtMaxLength = 52
     }
 
-    // MARK: - Internal
+    // MARK: - Public
 
     @MainActor
     static func showSavePanel(for transcription: AttributedString) {
