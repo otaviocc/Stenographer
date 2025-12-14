@@ -23,7 +23,7 @@ struct StenographerApplication: App {
         .windowStyle(.automatic)
         .defaultSize(width: 900, height: 600)
         .commands {
-            CommandGroup(replacing: .newItem) { }
+            CommandGroup(replacing: .newItem) {}
         }
     }
 

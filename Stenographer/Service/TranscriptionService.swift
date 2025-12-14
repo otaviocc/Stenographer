@@ -75,7 +75,7 @@ actor TranscriptionService: TranscriptionServiceProtocol {
                 locale: locale,
                 transcriptionOptions: [],
                 reportingOptions: [],
-                attributeOptions: []
+                attributeOptions: [.audioTimeRange]
             )
 
             let modules = [transcriber]
@@ -104,11 +104,10 @@ actor TranscriptionService: TranscriptionServiceProtocol {
                 finishAfterFile: true
             )
 
-            var fullTranscript = ""
+            var fullTranscript = AttributedString()
 
             for try await result in transcriber.results {
-                let text = String(result.text.characters)
-                fullTranscript += text
+                fullTranscript += result.text
                 continuation.yield(.transcriptionUpdated(fullTranscript))
             }
 

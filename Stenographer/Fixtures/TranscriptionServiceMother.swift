@@ -28,7 +28,9 @@
             ) -> AsyncThrowingStream<TranscriptionEvent, Error> {
                 .init { continuation in
                     continuation.yield(.statusChanged("Transcribing..."))
-                    continuation.yield(.transcriptionUpdated("Sample transcription text for preview."))
+                    continuation.yield(
+                        .transcriptionUpdated(.init("Sample transcription text for preview."))
+                    )
                     continuation.yield(.completed)
                     continuation.finish()
                 }

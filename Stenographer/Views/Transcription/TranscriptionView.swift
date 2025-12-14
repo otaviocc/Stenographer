@@ -120,7 +120,7 @@ struct TranscriptionView: View {
                     .padding(.top, 12)
                 }
 
-                Text(viewModel.transcription)
+                Text(viewModel.transcriptionText)
                     .font(.body)
                     .textSelection(.enabled)
                     .lineSpacing(4)

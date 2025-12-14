@@ -2,7 +2,7 @@ import Foundation
 
 enum TranscriptionEvent: Sendable {
 
-    case transcriptionUpdated(String)
+    case transcriptionUpdated(AttributedString)
     case statusChanged(String)
     case completed
 }

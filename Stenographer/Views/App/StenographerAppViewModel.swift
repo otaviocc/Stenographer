@@ -14,7 +14,7 @@ final class StenographerAppViewModel {
     }
 
     private(set) var supportedLocales: [Locale] = []
-    private(set) var transcription = ""
+    private(set) var transcription = AttributedString()
     private(set) var error: String?
     private(set) var isTranscribing = false
     private(set) var statusMessage = ""
@@ -54,7 +54,7 @@ final class StenographerAppViewModel {
     }
 
     func transcribe(url: URL) {
-        transcription = ""
+        transcription = .init()
         error = nil
         isTranscribing = true
         statusMessage = "Preparing..."

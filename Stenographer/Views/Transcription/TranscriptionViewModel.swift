@@ -10,20 +10,24 @@ final class TranscriptionViewModel {
 
     var showCopiedFeedback = false
 
-    private(set) var transcription = ""
+    private(set) var transcription = AttributedString()
     private(set) var error: String?
     private(set) var isTranscribing = false
 
     // MARK: - Computed Properties
 
+    var transcriptionText: String {
+        String(transcription.characters)
+    }
+
     var wordCount: Int {
-        transcription
+        transcriptionText
             .split(whereSeparator: { $0.isWhitespace || $0.isNewline })
             .count
     }
 
     var hasTranscription: Bool {
-        !transcription.isEmpty
+        !transcription.characters.isEmpty
     }
 
     var hasError: Bool {
@@ -31,11 +35,11 @@ final class TranscriptionViewModel {
     }
 
     var shouldShowEmptyState: Bool {
-        transcription.isEmpty && !isTranscribing && error == nil
+        transcription.characters.isEmpty && !isTranscribing && error == nil
     }
 
     var shouldShowTranscriptionContent: Bool {
-        !transcription.isEmpty || isTranscribing
+        !transcription.characters.isEmpty || isTranscribing
     }
 
     var shouldShowProgressIndicator: Bool {
@@ -66,7 +70,7 @@ final class TranscriptionViewModel {
     // MARK: - Public
 
     func updateState(
-        transcription: String,
+        transcription: AttributedString,
         error: String?,
         isTranscribing: Bool
     ) {
@@ -77,7 +81,7 @@ final class TranscriptionViewModel {
 
     func copyToClipboard() {
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(transcription, forType: .string)
+        NSPasteboard.general.setString(transcriptionText, forType: .string)
 
         showCopiedFeedback = true
 
@@ -88,22 +92,6 @@ final class TranscriptionViewModel {
     }
 
     func saveToFile() {
-        let savePanel = NSSavePanel()
-        savePanel.allowedContentTypes = [.plainText]
-        savePanel.nameFieldStringValue = "transcription.txt"
-        savePanel.title = "Save Transcription"
-        savePanel.message = "Choose a location to save the transcription"
-
-        savePanel.begin { [weak self] response in
-            guard let self else { return }
-
-            if response == .OK, let url = savePanel.url {
-                do {
-                    try transcription.write(to: url, atomically: true, encoding: .utf8)
-                } catch {
-                    print("Failed to save file: \(error)")
-                }
-            }
-        }
+        TranscriptionExportService.showSavePanel(for: transcription)
     }
 }

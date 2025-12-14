@@ -14,7 +14,7 @@
         ) -> TranscriptionViewModel {
             let viewModel = TranscriptionViewModel()
             viewModel.updateState(
-                transcription: transcription,
+                transcription: .init(transcription),
                 error: error,
                 isTranscribing: isTranscribing
             )
