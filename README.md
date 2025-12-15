@@ -21,7 +21,7 @@ brew install --cask stenographer
 
 ## Learning Exercise
 
-This project was created as a learning exercise to explore Apple's new Speech framework capabilities in macOS Tahoe. While the application is functional and produces quality transcriptions, it is not intended for release on the App Store. It serves as a reference implementation for understanding:
+This project was created as a learning exercise to explore Apple's new Speech framework capabilities in macOS Tahoe. It serves as a reference implementation for understanding:
 
 - The new `SpeechTranscriber` and `SpeechAnalyzer` APIs
 - On-device speech recognition with `AssetInventory` for language model management
