@@ -8,6 +8,10 @@ The app leverages the new `SpeechTranscriber` and `SpeechAnalyzer` APIs introduc
 
 ## Install Stenographer
 
+**Download directly from GitHub Releases**
+
+You can download the latest pre-built version of Stenographer directly from the [GitHub Releases page](https://github.com/otaviocc/Stenographer/releases). Simply download the `.zip` file from the latest release, open it, and drag the Stenographer app to your Applications folder. This method is useful if you prefer manual installation or don't use Homebrew.
+
 **Install via [Brew](https://brew.sh) 🤩**
 
 ```bash
