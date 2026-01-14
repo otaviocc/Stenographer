@@ -22,7 +22,7 @@ final class TranscriptionViewModel {
 
     var wordCount: Int {
         transcriptionText
-            .split(whereSeparator: { $0.isWhitespace || $0.isNewline })
+            .split { $0.isWhitespace || $0.isNewline }
             .count
     }
 
